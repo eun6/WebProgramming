@@ -17,7 +17,7 @@
 		let xbtn = document.createElement("button");
 		xbtn.className = "btn-close ms-auto";
 		
-		xbtn.onClick = function(e){
+		xbtn.onclick = function(e){
 			//이벤트 발생한 li 요소 구해서 ul 요소에서 제거
 			let pnode = e.target.parentNode;
 			list.removeChild(pnode);
