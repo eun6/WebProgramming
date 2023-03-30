@@ -37,7 +37,7 @@
 		box-sizing: border-box;
 	}
 	.form-control:focus {
-		transition: .1s;
+		transition: .3s;
 		outline: 4.7px solid rgba(35, 145, 230, .3);
 		border : 0.5px solid rgb(35, 145, 230);
 	}
@@ -68,6 +68,11 @@
 		padding : 7px 10px;
 		margin-left : -6px;
 	}
+	.btn-add:focus {
+		transition: .3s;
+		outline: 4.7px solid rgba(35, 145, 230, .3);
+		border : 0.5px solid rgb(35, 145, 230);
+	}
 	.btn-close {
 		background-color : rgba(0, 0, 0, 0);
 		border : none;
@@ -80,6 +85,7 @@
 		border : 5px solid rgba(35, 145, 230, .3);
 		border-radius : 5px;
 	}
+	
 </style>
 <script>
 	function addItem(){
@@ -87,28 +93,30 @@
 		let list = document.getElementById("todolist");
 		let listitem = document.createElement("li");
 	
-		//새로운 목록에 디자인 추가
 		listitem.className = "listitem";
 		
-		//삭제 버튼
 		let xbtn = document.createElement("button");
 		xbtn.className = "btn-close";
 		var text = document.createTextNode('X');
 		xbtn.appendChild(text);
 		
 		xbtn.onclick = function(e){
-			//이벤트 발생한 li 요소 구해서 ul 요소에서 제거
 			let pnode = e.target.parentNode;
 			list.removeChild(pnode);
 		}
 		
-		//입력값을 <li> 태그 body에 추가
+		//새로 추가한 자바스크립트 코드
+		xbtn.addEventListener("mouseover", function(e){
+			e.target.style.color = "black";
+		}, false);
+		xbtn.addEventListener("mouseout", function(e){
+			e.target.style.color = "gray";
+		}, false);
+		
 		listitem.innerText = todo.value;
-		//ul 요소에 li 요소 추가
 		listitem.appendChild(xbtn);
 		list.appendChild(listitem);
 		
-		//입력칸 비우기, 포커스 이동
 		todo.value="";
 		todo.focus();
 		
