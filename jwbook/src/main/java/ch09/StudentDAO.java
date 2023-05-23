@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Entity 클래스 받아서...
 public class StudentDAO {
 	Connection conn = null;
 	PreparedStatement pstmt;

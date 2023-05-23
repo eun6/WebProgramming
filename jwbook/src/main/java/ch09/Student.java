@@ -1,6 +1,8 @@
 package ch09;
 
 import java.sql.Date;
+
+//Entity 클래스
 public class Student {
 	private int id;
 	private String username;
