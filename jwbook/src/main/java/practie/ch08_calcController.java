@@ -31,12 +31,15 @@ public class ch08_calcController extends HttpServlet {
 		String view = "";
 		
 		if (action == null) {
-			getServletContext().getRequestDispatcher("/ch08/calcController?action=form").forward(request, response);
+			getServletContext().getRequestDispatcher("/ch08/calcController?action=listCalc").forward(request, response);
+			
 		} else {
 			if (action.equals("result")) view=result(request,response);
 			else if (action.equals("form")) view=form(request,response);
+			else if (action.equals("listCalc")) view=listCalc(request,response);
+			getServletContext().getRequestDispatcher("/practice/" + view).forward(request, response);
 		}
-		getServletContext().getRequestDispatcher("/practice/" + view).forward(request, response);
+		
 	}
 	
 	//계산화면
@@ -56,9 +59,12 @@ public class ch08_calcController extends HttpServlet {
 		case "*" : result=n1*n2; break;
 		case "/" : result=n1/n2; break;
 		}
+		//result라는 이름에 value 할당
 		request.setAttribute("result", result);
 		
 		ch08_calculator c = new ch08_calculator();
+		//DAO 객체에 값 매핑
+		c.setResult(String.valueOf(result));
 		try {
 			BeanUtils.populate(c, request.getParameterMap());
 		}catch (Exception e) {
@@ -66,5 +72,10 @@ public class ch08_calcController extends HttpServlet {
 		}
 		dao.insert(c);
 		return "ch08_calc.jsp";
+	}
+	//계산 로그
+	private String listCalc(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("calc", dao.getAll());
+		return "ch08_calcform.jsp";
 	}
 }

@@ -1,8 +1,11 @@
 package practie;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ch08_calculatorDAO {
 	Connection conn = null;
@@ -51,4 +54,30 @@ public class ch08_calculatorDAO {
 	}
 	
 	//목록 불러오는 메서드
+	public List<ch08_calculator> getAll() {
+		open();
+		List<ch08_calculator> calc = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement("SELECT * FROM CALCULATOR");
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ch08_calculator c = new ch08_calculator();
+				c.setId(rs.getInt("id"));
+				c.setFirst(rs.getString("NUM1"));
+				c.setSecond(rs.getString("NUM2"));
+				c.setResult(rs.getString("RESULT"));
+				c.setOp(rs.getString("OP"));
+				calc.add(c);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+			System.out.println("완료");
+		}
+		return calc;
+	}
 }

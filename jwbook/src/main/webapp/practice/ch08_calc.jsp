@@ -12,5 +12,6 @@
 	<div id="result" name="result">
 		결과 : ${result}
 	</div>
+	<button onclick="location.href='/jwbook/ch08/calcController'">돌아가기</button>
 </body>
 </html>
