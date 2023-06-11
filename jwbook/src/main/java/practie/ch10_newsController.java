@@ -38,6 +38,7 @@ public class ch10_newsController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
 		String action = request.getParameter("action");
 		
 		dao = new ch10_newsDAO();
